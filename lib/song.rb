@@ -1,5 +1,6 @@
 require_relative '../lib/artist.rb'
 require_relative '../lib/genre.rb'
+require "pry"
 
 class Song
   attr_accessor :name, :genre, :artist
@@ -46,7 +47,9 @@ class Song
   def genre=(genre)
     if genre.is_a?(Genre)
       @genre = genre
-      genre.add_song(self)
+      if genre.songs.include?(self) == false
+        genre.songs << self
+      end
     end
   end
 
