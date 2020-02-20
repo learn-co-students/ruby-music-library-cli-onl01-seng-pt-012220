@@ -1,3 +1,5 @@
+require_relative '../lib/artist'
+require_relative '../lib/genre'
 
 class Song
   include Concerns::ClassMethods
@@ -5,17 +7,22 @@ class Song
   @@all = []
 
   ## Instance methods
-  def initialize(name, artist = nil)
+  def initialize(name, artist = nil, genre = nil)
     @name = name
-    self.artist=(artist)
+    if artist != nil
+      self.artist=(artist)
+    end
     save
   end
   def save
     @@all << self
   end
-  def artist=(name)
-    Artist.new(name).add_song(self)
+
+  def self.artist=(a)
+    add_artist = Artist.new(a)
+    add_artist.add_song(self)
   end
+
 
   ## class methods
   def self.all
@@ -33,5 +40,6 @@ class Song
   def self.create(name)
     self.new(name)
   end
+
 
 end

@@ -1,3 +1,5 @@
+require_relative '../lib/genre'
+require_relative '../lib/song'
 
 class Artist
   include Concerns::ClassMethods
