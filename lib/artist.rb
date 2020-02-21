@@ -1,7 +1,9 @@
 require_relative '../lib/song.rb'
-
+require "pry"
 class Artist
-  attr_accessor :name, :songs
+  extend Concerns::Findable
+  attr_accessor :name, :songs, :genres
+
   @@all = []
 
   def initialize(name)
@@ -31,6 +33,16 @@ class Artist
         song.artist = self
         @songs << song
     end
+  end
+
+  def genres
+    g = []
+    Song.all.collect do |song|
+      if song.artist == self
+        g << song.genre
+      end
+    end
+    g.uniq
   end
 
 
