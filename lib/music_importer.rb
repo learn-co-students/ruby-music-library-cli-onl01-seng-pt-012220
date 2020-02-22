@@ -1,4 +1,3 @@
-require_relative '../lib/song.rb'
 class MusicImporter
   attr_accessor :path, :files
 

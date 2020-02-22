@@ -1,7 +1,3 @@
-require_relative '../lib/artist.rb'
-require_relative '../lib/genre.rb'
-require "pry"
-
 class Song
   attr_accessor :name, :genre, :artist
   extend Concerns::Findable
