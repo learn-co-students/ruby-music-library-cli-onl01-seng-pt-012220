@@ -62,4 +62,26 @@ class MusicLibraryController
     end
   end
 
+  def list_songs_by_artist
+    puts "Please enter the name of an artist:"
+    artist_name = gets
+    artist = nil
+    artists_songs = []
+    song_names = []
+    count = 1
+    #songs
+    artist = Artist.find_by_name(artist_name)
+    Song.all.select{|song| song.artist == artist}.each do |song|
+      song_names << song.name
+    end
+    song_names.sort!
+    song_names.each do |song|
+      this_song = Song.find_by_name(song)
+      puts "#{count}. #{this_song.name} - #{this_song.genre.name}"
+      count +=1
+    end
+
+    binding.pry
+  end
+
 end
