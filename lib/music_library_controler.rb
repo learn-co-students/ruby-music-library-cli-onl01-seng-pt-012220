@@ -80,8 +80,26 @@ class MusicLibraryController
       puts "#{count}. #{this_song.name} - #{this_song.genre.name}"
       count +=1
     end
+  end
 
-    binding.pry
+  def list_songs_by_genre
+    puts "Please enter the name of an artist:"
+    genre_name = gets
+    genre = nil
+    genres_songs = []
+    song_names = []
+    count = 1
+    #songs
+    genre = Genre.find_by_name(genre_name)
+    Song.all.select{|song| song.genre == genre}.each do |song|
+      song_names << song.name
+    end
+    song_names.sort!
+    song_names.each do |song|
+      this_song = Song.find_by_name(song)
+      puts "#{count}. #{this_song.name} - #{this_song.genre.name}"
+      count +=1
+    end
   end
 
 end
