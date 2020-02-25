@@ -1,6 +1,6 @@
 #require_relative "../config/environment.rb"
 class MusicLibraryController
-  attr_accessor :path, :play
+  attr_accessor :path, :play, :song_number
   def initialize(path = './db/mp3s')
     @path = path
     MusicImporter.new(@path).import
@@ -19,36 +19,36 @@ class MusicLibraryController
     puts "To quit, type 'exit'."
     puts "What would you like to do?"
     until user_input == "exit"
-        user_input = gets
+      case user_input
+      when 'list songs'
+        list_songs
+      when 'list artists'
+        list_artists
+      when 'list artist'
+        list_songs_by_artist
+      when 'list genres'
+        list_genres
+      when 'list genre'
+        list_songs_by_genre
+      when 'play song'
+        play_song
+      end
+      user_input = gets
     end
-    case user_input
-    when 'list songs'
-      list_songs
-    when 'list artists'
-      list_artists
-    when 'list artist'
-      list_songs_by_artist
-    when 'list genres'
-      list_genres
-    when 'list genre'
-      list_songs_by_genre
-    when 'play song'
-      play_song
-    end
-
   end
 
-  def list_songs(num = nil)
+  def list_songs(something = nil)
     song_list = []
     Song.all.each do |song|
       song_list << song.name
     end
+    binding.pry
     count = 1
     song_list.sort!
     if @play
-      users_song = Song.find_by_name(song_list[num])
+      users_song = Song.find_by_name(song_list[@song_number - 1])
       puts "Playing #{users_song.name} by #{users_song.artist.name}"
-    else
+    elsif @play == false
       song_list.each do |song|
         this_song = Song.find_by_name(song)
         puts "#{count}. #{this_song.artist.name} - #{this_song.name} - #{this_song.genre.name}"
@@ -127,20 +127,10 @@ class MusicLibraryController
   def play_song
     @play = true
     puts "Which song number would you like to play?"
-    song_number = gets.to_i
-    #song_name = nil
-    #users_song = nil
-  #  binding.pry
-    if song_number >= 1 && song_number <= Song.all.length
-      list_songs(song_number - 1)
-    #  users_song = Song.find_by_name(list_songs[song_number - 1])
-    #  puts "Playing #{users_song[0].name} by #{users_song[0].artist.name}"
-
+    @song_number = gets.to_i
+    if @song_number >= 1 && @song_number <= Song.all.length
+      list_songs
     end
-
-
-
-
   end
 
 end
