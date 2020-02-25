@@ -1,3 +1,4 @@
+#require_relative "../config/environment.rb"
 class MusicImporter
   attr_accessor :path, :files
 

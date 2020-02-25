@@ -1,3 +1,4 @@
+#require_relative "../config/environment.rb"
 class MusicLibraryController
   attr_accessor :path
   def initialize(path = './db/mp3s')
@@ -18,6 +19,20 @@ class MusicLibraryController
     puts "What would you like to do?"
     until user_input == "exit"
         user_input = gets
+    end
+    case user_input
+    when 'list songs'
+      list_songs
+    when 'list artists'
+      list_artists
+    when 'list artist'
+      list_songs_by_artist
+    when 'list genres'
+      list_genres
+    when 'list genre'
+      list_songs_by_genre
+    when 'play song'
+      play_song
     end
 
   end
@@ -104,11 +119,23 @@ class MusicLibraryController
 
   def play_song
     puts "Which song number would you like to play?"
-    song_number = gets
-    users_song = Song.all.select{|song| song.name == list_songs[song_number.to_i]}
-    puts "Playing #{users_song[0].name} by #{users_song[0].artist.name}"
+    song_number = gets.to_i
+    song_name = nil
+    users_song = nil
+  #  binding.pry
+    if song_number >= 1 && song_number <= Song.all.length
+    #  song_name = list_songs[song_number - 1]
+      users_song = Song.find_by_name(list_songs[song_number - 1])
 
-    binding.pry
+      if users_song != nil
+          puts "Playing #{users_song[0].name} by #{users_song[0].artist.name}"
+
+      end
+
+    end
+
+
+
 
   end
 
