@@ -42,7 +42,6 @@ class MusicLibraryController
     Song.all.each do |song|
       song_list << song.name
     end
-    binding.pry
     count = 1
     song_list.sort!
     if @play
