@@ -1,9 +1,10 @@
 #require_relative "../config/environment.rb"
 class MusicLibraryController
-  attr_accessor :path
+  attr_accessor :path, :play
   def initialize(path = './db/mp3s')
     @path = path
     MusicImporter.new(@path).import
+    @play = false
   end
 
   def call
@@ -37,18 +38,24 @@ class MusicLibraryController
 
   end
 
-  def list_songs
+  def list_songs(num = nil)
     song_list = []
     Song.all.each do |song|
       song_list << song.name
     end
     count = 1
     song_list.sort!
-    song_list.each do |song|
-      this_song = Song.find_by_name(song)
-      puts "#{count}. #{this_song.artist.name} - #{this_song.name} - #{this_song.genre.name}"
-      count +=1
+    if @play
+      users_song = Song.find_by_name(song_list[num])
+      puts "Playing #{users_song.name} by #{users_song.artist.name}"
+    else
+      song_list.each do |song|
+        this_song = Song.find_by_name(song)
+        puts "#{count}. #{this_song.artist.name} - #{this_song.name} - #{this_song.genre.name}"
+        count +=1
+      end
     end
+
   end
 
   def list_artists
@@ -118,15 +125,16 @@ class MusicLibraryController
   end
 
   def play_song
+    @play = true
     puts "Which song number would you like to play?"
     song_number = gets.to_i
-    song_name = nil
-    users_song = nil
+    #song_name = nil
+    #users_song = nil
   #  binding.pry
     if song_number >= 1 && song_number <= Song.all.length
-    #  song_name = list_songs[song_number - 1]
-      users_song = Song.find_by_name(list_songs[song_number - 1])
-      puts "Playing #{users_song[0].name} by #{users_song[0].artist.name}"
+      list_songs(song_number - 1)
+    #  users_song = Song.find_by_name(list_songs[song_number - 1])
+    #  puts "Playing #{users_song[0].name} by #{users_song[0].artist.name}"
 
     end
 
