@@ -126,11 +126,7 @@ class MusicLibraryController
     if song_number >= 1 && song_number <= Song.all.length
     #  song_name = list_songs[song_number - 1]
       users_song = Song.find_by_name(list_songs[song_number - 1])
-
-      if users_song != nil
-          puts "Playing #{users_song[0].name} by #{users_song[0].artist.name}"
-
-      end
+      puts "Playing #{users_song[0].name} by #{users_song[0].artist.name}"
 
     end
 
