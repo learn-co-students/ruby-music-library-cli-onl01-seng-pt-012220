@@ -1,0 +1,29 @@
+def Song.new("Blank Space").name
+  attr_accessor:Name, :Artist, :Genre
+  @@all = []
+
+def initialize()
+  @name = name
+  @@all << self
+  
+end
+
+def self.all 
+  @@all
+  
+end
+
+
+Song.all = []
+
+Artist.all = []
+
+end
+
+module Concerns::ModuleName
+
+end
+
+
+
+

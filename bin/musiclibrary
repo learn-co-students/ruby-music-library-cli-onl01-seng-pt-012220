@@ -1,4 +1,13 @@
-#!/usr/bin/env ruby
+ require_relative '../config/environment'
+ 
+ 
+ module Concerns::Prince
+ 
+ 
+ end
+ 
+ 
+ #!/usr/bin/env ruby
 
 require_relative '../config/environment'
 

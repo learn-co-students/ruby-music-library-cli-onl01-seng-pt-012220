@@ -1,7 +1,7 @@
 require "spec_helper"
 
-describe "MusicLibraryController" do
-  describe "#initialize" do
+"MusicLibraryController" do
+"#initialize" do
     it "accepts one argument, the path to the MP3 files to be imported" do
       expect{ MusicLibraryController.new("./spec/fixtures/mp3s") }.to_not raise_error
     end
@@ -62,5 +62,7 @@ describe "MusicLibraryController" do
 
       capture_puts { music_library_controller.call }
     end
+    
+    
   end
 end

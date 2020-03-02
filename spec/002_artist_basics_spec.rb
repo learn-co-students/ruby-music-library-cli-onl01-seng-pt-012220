@@ -1,3 +1,62 @@
+def Artist.new("Blank Space").name
+  attr_accessor:Name, :Artist, :Genre
+  @@all = []
+
+def initialize()
+  @name = name
+  @@all << self
+  
+end
+
+def self.all 
+  @@all
+  
+end
+
+def find_by_name
+  
+end
+
+def find_or_create_by_name
+  
+end
+
+def find_or_create_by_name.all
+  
+end
+
+Song.new("Song Title", artist_object, genre_object)
+
+end
+
+def Song.all.first 
+
+end
+def Name.Artist = self 
+
+end 
+
+def Add_song.new = []
+
+end
+
+Add_song.new = []
+
+Song.all = []
+
+Artist.all = []
+
+  end
+ 
+module Concerns::ModuleName
+
+end
+
+end
+  
+end
+
+
 require "spec_helper"
 
 describe "Artist" do
