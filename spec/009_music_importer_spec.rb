@@ -1,6 +1,43 @@
 require "spec_helper"
 
-describe "MusicImporter" do
+def MP3Importer
+  attr_accessor:Name, :Artist, :genre
+  @@all = all
+end
+
+def initialize(path)
+  @path = path
+  @@all << self
+end
+
+def files 
+  
+end
+
+def Dir_entries(@path).select{|file|.file.include?("MP3")}
+  
+end
+
+def import
+
+end
+
+def .new_from_filename
+  
+end
+
+def .create_from_filename
+  
+end
+
+def find_or_create_by_name
+  
+end
+
+end
+
+  
+  describe "MusicImporter" do
   let(:music_importer) { MusicImporter.new("./spec/fixtures/mp3s") }
 
   describe "#initialize" do
