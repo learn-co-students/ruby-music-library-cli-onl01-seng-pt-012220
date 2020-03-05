@@ -18,7 +18,8 @@ class MusicLibraryController
       puts "To play a song, enter 'play song'."
       puts "To quit, type 'exit'."
       puts "What would you like to do?"
-    input = gets.chomp
+      
+    input = gets.chomp.downcase
     
     case input
       when 'list songs'
@@ -70,17 +71,17 @@ class MusicLibraryController
     puts "Please enter the name of a genre:"
         input = gets.strip
         if genre = Genre.find_by_name(input)
-         genre.songs.sort{|a,b|  a.name<=>b.name}.each.with_index{|song,i|  puts "#{i+1}. #{song.artist.name} - #{song.name}"}
+         genre.songs.sort{|a,b|  a.name<=>b.name}.each.with_index{|song,i| puts "#{i+1}. #{song.artist.name} - #{song.name}"}
        end 
    end 
    
    def play_song
      puts "Which song number would you like to play?"
-     input = gets.chomp.to_i
-     limit= Song.all.length
-     if input.between?(1,limit)
+      input = gets.chomp.to_i
+      limit= Song.all.length
+      if input.between?(1,limit)
      song = Song.all.sort{|a,b| a.name<=>b.name }.fetch(input -1)
-     puts "Playing #{song.name} by #{song.artist.name}"
+      puts "Playing #{song.name} by #{song.artist.name}"
      
    end 
  end 
